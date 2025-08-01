@@ -1,0 +1,234 @@
+/* ===============================================================
+   VARIABLES Y AJUSTES GENERALES
+   ==============================================================*/
+:root{
+  /* Paleta principal */
+  --dark:      #1f1f1f;        /* Fondo navbar y footer */
+  --primary:   #00bcd4;        /* Color de acento / links */
+  --card-bg:   #f5f6fa;        /* Fondo de tarjetas */
+  --text-main: #f0f0f0;        /* Texto claro sobre fondo oscuro */
+
+  /* Imagen de pizarra (fondo general) */
+  --blackboard:url('https://img.freepik.com/foto-gratis/tabla-negra-formulas-calculos-cientificos-inscritos_1150-19413.jpg?semt=ais_hybrid&w=740&q=80');
+}
+
+/* Reseteo rápido */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;}
+html{scroll-behavior:smooth;}          /* Scroll suave */
+
+/* Fondo global con la pizarra.  
+   'fixed' 👉 se queda quieto mientras haces scroll. */
+body{
+  background:var(--blackboard) center/cover fixed no-repeat;
+  color:var(--text-main);
+}
+
+/* ===============================================================
+   NAVBAR (centrado y responsive)
+   ==============================================================*/
+.navbar{
+  position:sticky; top:0; z-index:1000;   /* Siempre visible arriba */
+  display:flex; justify-content:center;   /* Centra el bloque de links */
+  background:var(--dark);                 /* Color sólido para contraste */
+  padding:1rem 2rem;
+}
+
+/* Contenedor de enlaces.
+   ¡Está centrado porque su padre (.navbar) usa justify-content:center! */
+.navbar-links{
+  display:flex; gap:1.8rem;
+}
+
+/* Estilo de cada enlace */
+.navbar-links a{
+  color:#fff; text-decoration:none; font-weight:600;
+  transition:color .2s ease;
+}
+.navbar-links a:hover{color:var(--primary);}
+
+/* --- Botón hamburguesa (solo se muestra en móvil) --- */
+.hamburger-menu{
+  display:none;          /* Oculto en desktop */
+  flex-direction:column; gap:4px;
+  cursor:pointer;
+  position:absolute;     /* Lo llevamos a la derecha sin perder centrado */
+  right:1.5rem; top:1.2rem;
+}
+.hamburger-menu span{
+  width:26px; height:3px; border-radius:2px; background:#fff;
+}
+
+/* Versión móvil (<768 px) */
+@media (max-width:768px){
+  .navbar-links{
+    display:none;                     /* ① Se oculta por defecto   */
+    position:absolute; top:64px;      /* ② Menú desplegable        */
+    right:0; width:200px;
+    flex-direction:column; gap:1rem;
+    background:var(--dark); padding:1rem 1.2rem;
+    border-radius:0 0 8px 8px;
+  }
+  .navbar-links.active{display:flex;} /* Se muestra con JavaScript */
+  .hamburger-menu{display:flex;}      /* Botón visible en móvil    */
+}
+
+/* ===============================================================
+   SECCIÓN PERFIL (hero)
+   ==============================================================*/
+.profile-section{
+  min-height:90vh;                 /* Casi pantalla completa      */
+  display:flex; justify-content:center; align-items:center;
+  padding:4rem 1rem;
+  backdrop-filter:blur(2px);       /* Ligero blur al fondo        */
+}
+.profile-content{
+  background:rgba(0,0,0,.80);      /* Tarjeta oscura semitransp.  */
+  border-radius:18px;
+  padding:1.5rem 2.5rem; max-width:600px; text-align:center;
+  box-shadow:0 8px 32px rgba(0,0,0,.35);
+  transition:transform .3s ease;
+}
+.profile-content:hover{transform:scale(1.03);}
+.profile-image{
+  width:130px; height:130px; margin:0 auto 1.2rem;
+  border-radius:50%; background-size:cover; background-position:center;
+  box-shadow:0 4px 18px rgba(0,0,0,.4);
+}
+.profile-content h1{font-size:2rem;margin-bottom:.4rem;}
+.subtitle{opacity:.85;font-size:1.15rem;margin-bottom:.6rem;}
+.bio{font-size:1rem;margin-bottom:1.3rem;}
+
+.cta-links a{
+  display:inline-block; margin:.4rem;
+  background:var(--primary); color:#fff; text-decoration:none;
+  padding:.55rem 1.1rem; border-radius:6px;
+  transition:background .25s ease;
+}
+.cta-links a:hover{background:#008a9c;}
+
+/* ===============================================================
+   SECCIONES GENERALES (Projects, Experience, Education, etc.)
+   ==============================================================*/
+.section-background{
+  background:rgba(0,0,0,.65);       /* Bloque oscuro translúcido  */
+  margin:0 auto; padding:60px 24px;
+  backdrop-filter:blur(2px);
+}
+.section-title{
+  text-align:center; font-size:2.1rem; margin-bottom:2.2rem;
+  text-transform:uppercase;
+}
+.section-title i{color:var(--primary);margin-right:.5rem;}
+
+/* Layout grid adaptable para tarjetas */
+.grid-container{
+  display:grid; gap:1.8rem;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+}
+.section-content{display:grid;gap:1.5rem;}
+
+/* ---------------- Tarjetas ---------------- */
+.section-card{
+  background:var(--card-bg); color:#444;
+  border-radius:14px; padding:1.6rem;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);
+  transition:transform .25s, box-shadow .25s;
+}
+.section-card:hover{
+  transform:translateY(-6px) scale(1.03);
+  box-shadow:0 8px 32px rgba(0,0,0,.22);
+}
+.section-card h3{font-size:1.35rem;margin-bottom:.65rem;}
+.section-card p{font-size:.96rem;line-height:1.45;}
+
+/* ===============================================================
+   FOOTER
+   ==============================================================*/
+.footer{
+  background:var(--dark); color:#ccc; text-align:center;
+  padding:1.6rem 1rem; display:flex; flex-direction:column; gap:1rem;
+  align-items:center;
+}
+.social-links{display:flex;gap:1.2rem;}
+.social-links a{color:#ccc;font-size:1.35rem;transition:.2s;}
+.social-links a:hover{color:var(--primary);}
+
+
+/* ========== MAIL widget ==================================================*/
+.mail-wrapper{
+  /* separación con el bloque anterior */
+  margin-top:1.8rem;
+
+  /* Nuevo → centra TÍTULO y BARRA en el contenedor de perfil */
+  display:flex;
+  flex-direction:column;
+  align-items:center;          /* ← clave del centrado */
+}
+
+.mail-title{
+  display:flex;
+  justify-content:center;      /* título centrado */
+  align-items:center;
+  font-size:1.25rem;
+  margin-bottom:.45rem;
+}
+.mail-title i{
+  color:var(--primary);
+  margin-right:.45rem;
+}
+
+/* Contenedor input + botones ---------------------------------------------*/
+.mail-bar{
+  position:relative;
+  display:flex;
+  align-items:center;
+
+  /* centrado y ancho máximo */
+  width:100%;
+  max-width:600px;             /* cambia si quieres más/menos ancho */
+  margin:0 auto;
+
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:8px;
+  overflow:hidden;
+}
+
+/* Decoración superior (línea fucsia + “punto”) ----------------------------*/
+.mail-indicator{
+  position:absolute;
+  top:0;left:0;
+  height:4px;width:100%;
+  background:linear-gradient(90deg,#ff0066 0%,#ff0099 100%);
+}
+.mail-indicator::before{
+  content:"";
+  position:absolute;left:20%;top:-4px;
+  width:12px;height:12px;border-radius:50%;
+  background:#ff004c;
+}
+
+/* Input de e-mail ---------------------------------------------------------*/
+.mail-bar input{
+  flex:1;
+  background:rgba(0,0,0,.55);
+  border:none;
+  padding:.6rem .9rem;
+  font-size:1rem;
+  color:#fff;
+}
+.mail-bar input:focus{outline:none;}
+
+/* Botones laterales -------------------------------------------------------*/
+.mail-bar button{
+  background:#79b5c4;
+  border:none;
+  color:#000;
+  padding:.8rem 1.2rem;
+  font-size:1rem;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  transition:filter .2s;
+}
+.mail-bar button:hover{filter:brightness(1.12);}
+.mail-bar button i{font-size:1.1rem;}  /* tamaño del icono */
