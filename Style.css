@@ -57,21 +57,77 @@ body{
 .hamburger-menu span{
   width:26px; height:3px; border-radius:2px; background:#fff;
 }
-
-/* Versión móvil (<768 px) */
-@media (max-width:768px){
-  .navbar-links{
-    display:none;                     /* ① Se oculta por defecto   */
-    position:absolute; top:64px;      /* ② Menú desplegable        */
-    right:0; width:200px;
-    flex-direction:column; gap:1rem;
-    background:var(--dark); padding:1rem 1.2rem;
-    border-radius:0 0 8px 8px;
-  }
-  .navbar-links.active{display:flex;} /* Se muestra con JavaScript */
-  .hamburger-menu{display:flex;}      /* Botón visible en móvil    */
+/* ===============================
+   Estilo para las imágenes de los proyectos
+   ===============================*/
+.project-image {
+  width: 100%; /* La imagen ocupa el 100% del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin distorsionarse */
+  border-radius: 12px; /* Bordes redondeados opcionales */
+  margin-bottom: 1.2rem; /* Espacio entre la imagen y el texto */
+  display: block;
+  max-width: 100%; /* Asegura que la imagen no se estire más allá de su contenedor */
+}
+/* ===============================
+   Layout para los proyectos (uno abajo del otro)
+   ===============================*/
+.grid-container {
+  display: grid;
+  gap: 1.8rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Asegura que las columnas se ajusten automáticamente */
+  justify-items: center; /* Centra las tarjetas horizontalmente */
+  align-items: stretch;   /* Hace que las tarjetas se estiren para tener la misma altura */
+  margin: 0 auto;        /* Centra la cuadrícula en el contenedor */
 }
 
+/* Tarjetas de proyectos */
+.section-card {
+  background: var(--card-bg);
+  color: #444;
+  border-radius: 14px;
+  padding: 1.6rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .12);
+  transition: transform .25s, box-shadow .25s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Asegura que el contenido se distribuya uniformemente */
+  align-items: center;
+  height: 100%; /* Asegura que las tarjetas se estiren a lo largo de la altura disponible */
+  width: 350px;  /* Ajustamos el ancho de las tarjetas */
+  max-width: 90%; /* Asegura que las tarjetas no excedan el ancho del contenedor */
+}
+.section-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .22);
+}
+
+/* ===============================
+   Estilo para las imágenes de los proyectos
+   ===============================*/
+.project-image {
+  width: 100%; /* La imagen ocupa el 100% del contenedor */
+  height: 200px; /* Asigna una altura fija para que todas las imágenes tengan el mismo tamaño */
+  object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+  border-radius: 12px;
+  margin-bottom: 1.2rem; /* Espacio entre la imagen y el texto */
+}
+
+/* ===============================
+   Centrado de las tarjetas
+   ===============================*/
+.section-card h3,
+.section-card p {
+  text-align: center; /* Centra el texto dentro de las tarjetas */
+}
+
+
+/* Versión móvil (<768 px) */
+@media (max-width: 768px) {
+  .section-card {
+    height: auto; /* Permite que las tarjetas se ajusten de manera más flexible en pantallas pequeñas */
+  }
+}
 /* ===============================================================
    SECCIÓN PERFIL (hero)
    ==============================================================*/
@@ -121,22 +177,42 @@ body{
 .section-title i{color:var(--primary);margin-right:.5rem;}
 
 /* Layout grid adaptable para tarjetas */
-.grid-container{
-  display:grid; gap:1.8rem;
-  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+.grid-container {
+  display: grid;
+  gap: 1.8rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Ancho mínimo ajustado para adaptarse mejor */
+  justify-items: center; /* Centra las tarjetas horizontalmente */
+  align-items: center;   /* Centra las tarjetas verticalmente */
+  margin: 0 auto;        /* Centra la cuadrícula en el contenedor */
 }
-.section-content{display:grid;gap:1.5rem;}
+
+.section-content {
+  display: grid;
+  gap: 1.8rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Asegura que las columnas se ajusten automáticamente */
+  justify-items: center; /* Centra las tarjetas horizontalmente */
+  align-items: center;   /* Centra las tarjetas verticalmente */
+  margin: 0 auto;        /* Centra la cuadrícula en el contenedor */
+}
 
 /* ---------------- Tarjetas ---------------- */
-.section-card{
-  background:var(--card-bg); color:#444;
-  border-radius:14px; padding:1.6rem;
-  box-shadow:0 4px 14px rgba(0,0,0,.12);
-  transition:transform .25s, box-shadow .25s;
+.section-card {
+  background: var(--card-bg);
+  color: #444;
+  border-radius: 14px;
+  padding: 1.6rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .12);
+  transition: transform .25s, box-shadow .25s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Asegura que el contenido de la tarjeta esté centrado */
+  width: 500px;         /* Ajustamos el ancho de las tarjetas */
+  max-width: 100%;       /* Asegura que las tarjetas no excedan el ancho del contenedor */
 }
-.section-card:hover{
-  transform:translateY(-6px) scale(1.03);
-  box-shadow:0 8px 32px rgba(0,0,0,.22);
+.section-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .22);
 }
 .section-card h3{font-size:1.35rem;margin-bottom:.65rem;}
 .section-card p{font-size:.96rem;line-height:1.45;}
